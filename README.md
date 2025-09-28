@@ -1,0 +1,2 @@
+- create a venv and install requirements
+- progress_bar.ipynb has the relevant demos
