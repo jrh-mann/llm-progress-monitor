@@ -165,7 +165,6 @@ pydantic==2.11.9
 pydantic-extra-types==2.10.5
 pydantic_core==2.33.2
 Pygments==2.19.1
-PyGObject==3.42.1
 PyJWT==2.3.0
 pyparsing==2.4.7
 python-apt==2.4.0+ubuntu4
