@@ -14,6 +14,7 @@ from transformers import AutoTokenizer, PreTrainedTokenizer
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import threading
 import queue
+from jaxtyping import Float, Int
 
 from pipeline.types import RolloutResponse, ChatMessage, FormattedResponse
 

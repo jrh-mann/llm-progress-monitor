@@ -10,6 +10,7 @@ import logging
 import os
 from pathlib import Path
 from pydantic import BaseModel
+from jaxtyping import Float, Int
 
 from pipeline.load_activations import prepare_dataloaders
 
@@ -53,13 +54,15 @@ class LogBinClassifier(nn.Module):
         self.n_bins = n_bins
         self.linear = nn.Linear(input_dim, n_bins, dtype=torch.bfloat16)
 
-    def forward(self, x: torch.Tensor) -> torch.Tensor:
+    def forward(self, x: Float[torch.Tensor, "batch d_model"]) -> Float[torch.Tensor, "batch n_bins"]:
         return self.linear(x)
 
 
-def bin_targets(y: torch.Tensor, n_bins: int = 11) -> torch.Tensor:
+def bin_targets(y: Int[torch.Tensor, "batch"], n_bins: int = 11) -> Int[torch.Tensor, "batch"]:
     """
-    Convert continuous target values to logarithmic bins.
+    Convert continuous target values to logarithmic bins using natural log (base e).
+    
+    Binning formula: floor(ln(y + 1)), clamped to [0, n_bins - 1]
     
     Args:
         y: Target values (tokens remaining)
@@ -71,7 +74,7 @@ def bin_targets(y: torch.Tensor, n_bins: int = 11) -> torch.Tensor:
     return (y + 1).log().floor().clamp(0, n_bins - 1).to('cuda', dtype=torch.long)
 
 
-def calculate_class_weights(train_dataloader: DataLoader, n_bins: int = 11) -> torch.Tensor:
+def calculate_class_weights(train_dataloader: DataLoader, n_bins: int = 11) -> Float[torch.Tensor, "n_bins"]:
     """
     Calculate inverse frequency weights for class balancing.
     

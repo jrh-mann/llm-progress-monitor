@@ -2,6 +2,8 @@
 
 from typing import TypedDict, Optional
 from pydantic import BaseModel, Field
+from jaxtyping import Float, Int
+import torch
 
 
 class PromptData(BaseModel):

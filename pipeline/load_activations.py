@@ -9,6 +9,7 @@ import os
 import logging
 from pathlib import Path
 from sklearn.model_selection import train_test_split
+from jaxtyping import Float, Int
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -17,7 +18,11 @@ logger = logging.getLogger(__name__)
 
 class ActivationData:
     """Container for loaded activation data"""
-    def __init__(self, token_ids: torch.Tensor, activations: torch.Tensor):
+    def __init__(
+        self, 
+        token_ids: Int[torch.Tensor, "seq_len"], 
+        activations: Float[torch.Tensor, "n_layers seq_len d_model"]
+    ):
         self.token_ids = token_ids  # Shape: (seq_len,)
         self.activations = activations  # Shape: (n_layers, seq_len, d_model)
 
@@ -127,7 +132,7 @@ class TokensRemainingDataset(Dataset):
     def __len__(self) -> int:
         return len(self.data)
     
-    def __getitem__(self, idx: int) -> Tuple[torch.Tensor, int, int]:
+    def __getitem__(self, idx: int) -> Tuple[Float[torch.Tensor, "d_model"], int, int]:
         return self.data[idx]
 
 
