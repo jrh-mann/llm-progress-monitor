@@ -1,0 +1,602 @@
+[
+  {
+    "instruction": "Write a short story about a cat and a dog.",
+    "response": "Jasper, a sleek black cat with ice-blue",
+    "char_length": 39,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Write a short story about a cat and a dog.",
+    "response": "Pepper, a sleek silver tabby, glared at Barna",
+    "char_length": 45,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Can you recommend a chocolate cake recipe for two?",
+    "response": "## Mini Chocolate Lava Cakes for Two\n\nThis recipe",
+    "char_length": 49,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Can you recommend a chocolate cake recipe for two?",
+    "response": "##  Chocolate Dream Cake for Two \n\nThis",
+    "char_length": 39,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Ask a question about consumer rights",
+    "response": "What are the core consumer rights that are most relevant",
+    "char_length": 56,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Ask a question about consumer rights",
+    "response": "What are some significant legal protections in place to ensure",
+    "char_length": 62,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Give me 3 examples of a vocabulary word that means \"determined\".",
+    "response": "Here are 3 examples of a vocabulary word that",
+    "char_length": 45,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Give me 3 examples of a vocabulary word that means \"determined\".",
+    "response": "Here are 3 words that mean \"determined,\"",
+    "char_length": 40,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Edit the following sentence by replacing the word \"excellent\" with a similar meaning:\n\n\"The coffee was excellent\"",
+    "response": "Here's a few ways to replace \"excellent",
+    "char_length": 39,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Edit the following sentence by replacing the word \"excellent\" with a similar meaning:\n\n\"The coffee was excellent\"",
+    "response": "Here are some ways to replace \"excellent\" in",
+    "char_length": 44,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Put together an outfit for a dinner date.",
+    "response": "Let's put together an outfit for a dinner",
+    "char_length": 41,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Put together an outfit for a dinner date.",
+    "response": "Of course! To give you the best outfit recommendation",
+    "char_length": 53,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Edit the sentence \"I'm running late so I quickly ate breakfast\" to correct the grammar",
+    "response": "Here are a few ways to correct the grammar of",
+    "char_length": 45,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Edit the sentence \"I'm running late so I quickly ate breakfast\" to correct the grammar",
+    "response": "Here are a few ways to correctly phrase the sentence",
+    "char_length": 52,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Name two health benefits of eating apples",
+    "response": "Here are two key health benefits of eating apples:",
+    "char_length": 50,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Name two health benefits of eating apples",
+    "response": "Here are two health benefits of eating apples:\n\n",
+    "char_length": 48,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Describe the importance of positive thinking",
+    "response": "## The Power of Positive Thinking: How It Impacts",
+    "char_length": 49,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Describe the importance of positive thinking",
+    "response": "Positive thinking may seem like a buzzword, but",
+    "char_length": 47,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Describe a feature a smartphone could have that would make it easier to take care of the environment.",
+    "response": "Here's a feature of a smartphone that could",
+    "char_length": 43,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Describe a feature a smartphone could have that would make it easier to take care of the environment.",
+    "response": "##  Smartphone Feature: The Eco-Journey Assistant",
+    "char_length": 49,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Create a poem with 4 lines that portrays the beauty of sunsets.",
+    "response": "Scarlet embers kissed the west's pale sky,",
+    "char_length": 42,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Create a poem with 4 lines that portrays the beauty of sunsets.",
+    "response": "Golden rays, a vibrant hue,\nThe sky",
+    "char_length": 35,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Describe a specific emotion using five words.",
+    "response": "**Hopeful.  Warm.  Calm.",
+    "char_length": 24,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Describe a specific emotion using five words.",
+    "response": "**Gleeful, buoyant, carefree, buoyant,",
+    "char_length": 38,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "What is the most efficient approach to reducing carbon emissions?",
+    "response": "That's a crucial and complex question! There",
+    "char_length": 44,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "What is the most efficient approach to reducing carbon emissions?",
+    "response": "There is no singular \"most efficient\" approach to",
+    "char_length": 49,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Compare a bacteria cell to a plant cell.",
+    "response": "Here's a detailed comparison of bacteria cells and",
+    "char_length": 50,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Compare a bacteria cell to a plant cell.",
+    "response": "## Bacteria vs Plant Cell:  A Tale of",
+    "char_length": 37,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Give me a list of 5 organisations that provide services for refugees in the United States.",
+    "response": "Here are 5 organizations that provide services for refugees",
+    "char_length": 59,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Give me a list of 5 organisations that provide services for refugees in the United States.",
+    "response": "Here are 5 organizations which provide services for refugees",
+    "char_length": 60,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Generate a random example of an IPv4 address.",
+    "response": "**192.168.1",
+    "char_length": 11,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Generate a random example of an IPv4 address.",
+    "response": "192.168.1.",
+    "char_length": 10,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Generate a speech outline for expressing your opinion on the issue of online privacy.",
+    "response": "## Speech Outline: The Price of Connection: Navig",
+    "char_length": 49,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Generate a speech outline for expressing your opinion on the issue of online privacy.",
+    "response": "## Speech Outline: The Growing Menace of Online Privacy",
+    "char_length": 55,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Generate a headline describing a current news article.",
+    "response": "Please provide me with a link or the article text",
+    "char_length": 49,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Generate a headline describing a current news article.",
+    "response": "Please provide me with a blurb or link to the",
+    "char_length": 45,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "What is the latest development in Artificial Intelligence?",
+    "response": "It's challenging to pinpoint a single \"latest",
+    "char_length": 45,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "What is the latest development in Artificial Intelligence?",
+    "response": "It's tough to pinpoint a *single*",
+    "char_length": 33,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Explain how information can be stored in a database",
+    "response": "Let's explore how information is stored in a",
+    "char_length": 44,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Explain how information can be stored in a database",
+    "response": "Let's delve into the ways information can be",
+    "char_length": 44,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Generate a sentence which describes the relationship between Elon Musk and SpaceX.",
+    "response": "Elon Musk is the co-founder, CEO,",
+    "char_length": 33,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Generate a sentence which describes the relationship between Elon Musk and SpaceX.",
+    "response": "Elon Musk is the visionary founder and CEO of SpaceX",
+    "char_length": 52,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Provide the name of a famous person who had a positive influence in the world.",
+    "response": "This is a great question, and it really depends",
+    "char_length": 47,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Provide the name of a famous person who had a positive influence in the world.",
+    "response": "One famous person who has had a significant positive influence",
+    "char_length": 62,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Create a metaphor that describes loneliness",
+    "response": "Loneliness is like a cracked tile in a mosaic",
+    "char_length": 45,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Create a metaphor that describes loneliness",
+    "response": "Loneliness is like a **wind howling in a",
+    "char_length": 40,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Summarize the most important characteristics of a good leader.",
+    "response": "A truly impactful leader embodies a mix of qualities that",
+    "char_length": 57,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Summarize the most important characteristics of a good leader.",
+    "response": "Here's a breakdown of key characteristics of good",
+    "char_length": 49,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Differentiate between a deviated septum and a deviated nasal spine.",
+    "response": "A **deviated septum** and a **devi",
+    "char_length": 34,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Differentiate between a deviated septum and a deviated nasal spine.",
+    "response": "Let's break down the difference between a devi",
+    "char_length": 46,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Write a script to explain the process of signing up for an online course.",
+    "response": "## Welcome to Online Course World!\n\n**(Intro",
+    "char_length": 44,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Write a script to explain the process of signing up for an online course.",
+    "response": "##  \"Signing Up For Online Success: Your",
+    "char_length": 40,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Describe a medicine that is used to treat an ailment associated with the heart",
+    "response": "Let's discuss a common medicine used to treat",
+    "char_length": 45,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Describe a medicine that is used to treat an ailment associated with the heart",
+    "response": "One common type of medicine used to treat heart ailments",
+    "char_length": 56,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Create a playlist of 10 songs that celebrates diversity and inclusion.",
+    "response": "Here's a playlist ready to uplift and inspire",
+    "char_length": 45,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Create a playlist of 10 songs that celebrates diversity and inclusion.",
+    "response": "Here is a playlist celebrating diversity and inclusion, representing",
+    "char_length": 68,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Why do rockets need an engine?",
+    "response": "Rockets need engines for several reasons, all stemming",
+    "char_length": 54,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Why do rockets need an engine?",
+    "response": "Rockets need engines to **generate the thrust they",
+    "char_length": 50,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Find the similarities between these two words - 'flower' and 'bouquet'.",
+    "response": "Here are some similarities between \"flower\" and \"",
+    "char_length": 49,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Find the similarities between these two words - 'flower' and 'bouquet'.",
+    "response": "Here are some similarities between the words \"flower\"",
+    "char_length": 53,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Make a list of three psychological techniques used in advertising.",
+    "response": "Here are three psychological techniques commonly used in advertising:",
+    "char_length": 69,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Make a list of three psychological techniques used in advertising.",
+    "response": "Here are three prominent psychological techniques used in advertising:",
+    "char_length": 70,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Come up with a domain-specific metaphor to explain how a computer works",
+    "response": "##  The Information Bakery\n\nImagine a computer as",
+    "char_length": 49,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Come up with a domain-specific metaphor to explain how a computer works",
+    "response": "## The Symphony of Bits:\n\nImagine a large",
+    "char_length": 41,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Identify 3 key problems with the current US healthcare system and propose solutions to those problems.",
+    "response": "## 3 Key Problems with the US Healthcare System",
+    "char_length": 47,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Identify 3 key problems with the current US healthcare system and propose solutions to those problems.",
+    "response": "The US healthcare system is undeniably complex, with numerous",
+    "char_length": 61,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Describe the most used transportation device in Egypt",
+    "response": "The most used transportation device in Egypt is **traditional",
+    "char_length": 61,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Describe the most used transportation device in Egypt",
+    "response": "The most commonly used transportation device in Egypt, by",
+    "char_length": 57,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Construct a timeline of Galileo's life.",
+    "response": "## Galileo Galilei: A Timeline\n\n**1",
+    "char_length": 35,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Construct a timeline of Galileo's life.",
+    "response": "## Galileo Galilei: A Life of Discovery\n\n",
+    "char_length": 41,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Create a strategy to increase the number of new customers by 30%.",
+    "response": "##  Strategy to Increase New Customer Acquisition by ",
+    "char_length": 53,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Create a strategy to increase the number of new customers by 30%.",
+    "response": "## Strategy to Increase New Customers by 30",
+    "char_length": 43,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Compose a 500-word essay on the themes of loneliness revealed in Ernest Hemingway's novel \"The Old Man and the Sea\".",
+    "response": "## The Unshakeable Heart of Loneliness:",
+    "char_length": 39,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Compose a 500-word essay on the themes of loneliness revealed in Ernest Hemingway's novel \"The Old Man and the Sea\".",
+    "response": "## The Weight of the World: Loneliness in",
+    "char_length": 41,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Provide the name of five different types of flowers.",
+    "response": "Here are five different types of flowers: \n\n",
+    "char_length": 44,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Provide the name of five different types of flowers.",
+    "response": "Here are five different types of flowers:\n\n1",
+    "char_length": 44,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "List five herbs that grow easily.",
+    "response": "Here are five herbs that are known for their ease",
+    "char_length": 49,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "List five herbs that grow easily.",
+    "response": "Here are five herbs that are generally quite easy to",
+    "char_length": 52,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "What is the history behind the painting 'The Starry Night'?",
+    "response": "\"The Starry Night\" is one of the",
+    "char_length": 32,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "What is the history behind the painting 'The Starry Night'?",
+    "response": "Vincent van Gogh's *The Starry Night",
+    "char_length": 36,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Suggest three techniques for improving online learning",
+    "response": "## Three Techniques for Improving Online Learning \n\nHere",
+    "char_length": 56,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Suggest three techniques for improving online learning",
+    "response": "Here are three techniques for improving online learning:\n\n",
+    "char_length": 58,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Create 5 reference resources that you'll use to complete your assignment.",
+    "response": "Please provide me with the assignment topic so I can",
+    "char_length": 52,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Create 5 reference resources that you'll use to complete your assignment.",
+    "response": "Please provide me with the assignment! \ud83d\ude0a  I",
+    "char_length": 43,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Summarize the debate about global warming.",
+    "response": "## Summary of the Global Warming Debate\n\nThe debate",
+    "char_length": 51,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Summarize the debate about global warming.",
+    "response": "The debate about global warming is complex and multifaceted,",
+    "char_length": 60,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Analyze the movie \"Back to the Future\" and identify the elements of the story that make it a successful film.",
+    "response": "\"Back to the Future\" is more than just",
+    "char_length": 38,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Analyze the movie \"Back to the Future\" and identify the elements of the story that make it a successful film.",
+    "response": "## Back to the Future: A Time-Well",
+    "char_length": 34,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Generate a sentence that explains the importance of keeping your mental health in check.",
+    "response": "Prioritizing your mental health ensures you're equipped",
+    "char_length": 55,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Generate a sentence that explains the importance of keeping your mental health in check.",
+    "response": "Maintaining good mental health is vital for your overall well",
+    "char_length": 61,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Edit this text to make it more descriptive: \"He likes to play basketball.\"",
+    "response": "Here are a few ways to make \"He likes",
+    "char_length": 37,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Edit this text to make it more descriptive: \"He likes to play basketball.\"",
+    "response": "Here are a few ways to make \"He likes",
+    "char_length": 37,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Curate 5 examples of effective communication techniques.",
+    "response": "Here are 5 examples of effective communication techniques,",
+    "char_length": 58,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Curate 5 examples of effective communication techniques.",
+    "response": "Here are 5 examples of effective communication techniques,",
+    "char_length": 58,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Give me a recipe for dumplings.",
+    "response": "## Classic Dumplings (Gyoza - Pan",
+    "char_length": 33,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Give me a recipe for dumplings.",
+    "response": "## Simple Fluffy Savory Dumplings\n\n**Yield",
+    "char_length": 42,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Describe the type of job or career that is attractive to you.",
+    "response": "As a large language model, I don't",
+    "char_length": 34,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Describe the type of job or career that is attractive to you.",
+    "response": "As a large language model, I don't",
+    "char_length": 34,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "List the components required for building a computer.",
+    "response": "Here's a list of the essential components that",
+    "char_length": 46,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "List the components required for building a computer.",
+    "response": "Here's a breakdown of the essential components you",
+    "char_length": 50,
+    "tokens_length": 10
+  }
+]

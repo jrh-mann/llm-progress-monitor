@@ -193,19 +193,22 @@ def store_activations(
                     gc.collect()
                     torch.cuda.empty_cache()
                     
-                    layer_outputs: List[Any] = []
-                    for layer in model.model.layers:  # type: ignore[attr-defined]
-                        # Extract activations: layer.output[0] has shape (batch, seq, d_model)
-                        layer_outputs.append(layer.output[0])
+                    # Get dimensions from first layer to pre-allocate tensor
+                    first_layer_output = model.model.layers[0].output  # type: ignore[attr-defined]
+                    batch_size_actual, seq_len, d_model = first_layer_output.shape
+                    num_layers = len(model.model.layers)  # type: ignore[attr-defined]
                     
-                    # Stack to get (layer, batch, seq, d_model)
-                    activations = torch.stack(layer_outputs, dim=0)
+                    # Pre-allocate tensor: (batch, layer, seq, d_model)
+                    activations = torch.zeros(batch_size_actual, num_layers, seq_len, d_model, dtype=first_layer_output.dtype, device=first_layer_output.device)
                     
-                    # Transpose to (batch, layer, seq, d_model)
-                    activations = activations.transpose(0, 1)
+                    # Fill tensor directly
+                    for layer_idx, layer in enumerate(model.model.layers):  # type: ignore[attr-defined]
+                        # Extract activations: layer.output has shape (batch, seq, d_model)
+                        activations[:, layer_idx, :, :] = layer.output
                     
-                    # Save each item in the batch to separate files
-                    for i, batch_item in enumerate(batch):
+                    # Prepare data for parallel saving
+                    save_tasks = []
+                    for i in range(len(batch)):
                         actual_idx = start_idx + batch_start + i
                         
                         # Get token IDs for this specific item
@@ -226,10 +229,21 @@ def store_activations(
                         # Extract only activations for non-padding tokens: (layer, non_padding_seq, d_model)
                         item_activations_no_padding = item_activations[:, non_padding_indices, :]
                         
-                        # Save tuple of (token_ids, activations) without padding
+                        # Prepare save task
                         save_path = Path(activations_dir) / f"{actual_idx}.pt"
+                        save_tasks.append((actual_idx, token_ids_no_padding, item_activations_no_padding, save_path))
+                    
+                    # Save in parallel using ThreadPoolExecutor
+                    from concurrent.futures import ThreadPoolExecutor
+                    
+                    def save_activation_item(task_data):
+                        actual_idx, token_ids_no_padding, item_activations_no_padding, save_path = task_data
+                        logger.info(f"Saving activations for response {actual_idx} (shape: {item_activations_no_padding.shape})")
                         torch.save((token_ids_no_padding, item_activations_no_padding), save_path)
                         logger.info(f"Saved activations for response {actual_idx} (shape: {item_activations_no_padding.shape})")
+                    
+                    with ThreadPoolExecutor(max_workers=4) as executor:
+                        executor.map(save_activation_item, save_tasks)
                     
             except Exception as e:
                 logger.error(f"Error on batch starting at {start_idx + batch_start}: {e}")
