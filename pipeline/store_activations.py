@@ -11,6 +11,9 @@ from typing import List, Dict, Optional, Any
 from pathlib import Path
 from pydantic import ValidationError
 from transformers import AutoTokenizer, PreTrainedTokenizer
+from concurrent.futures import ThreadPoolExecutor, as_completed
+import threading
+import queue
 
 from pipeline.types import RolloutResponse, ChatMessage, FormattedResponse
 
@@ -99,6 +102,36 @@ def format_responses_with_chat_template(
     return formatted_responses
 
 
+def save_activation_worker(save_queue: queue.Queue, activations_dir: str) -> None:
+    """
+    Worker function to save activations from a queue.
+    
+    Args:
+        save_queue: Queue containing save tasks
+        activations_dir: Directory to save activations
+    """
+    while True:
+        try:
+            task = save_queue.get(timeout=1)
+            if task is None:  # Sentinel value to stop worker
+                break
+                
+            actual_idx, token_ids_no_padding, item_activations_no_padding = task
+            save_path = Path(activations_dir) / f"{actual_idx}.pt"
+            
+            logger.info(f"Saving activations for response {actual_idx} (shape: {item_activations_no_padding.shape})")
+            torch.save((token_ids_no_padding, item_activations_no_padding), save_path)
+            logger.info(f"Saved activations for response {actual_idx} (shape: {item_activations_no_padding.shape})")
+            
+            save_queue.task_done()
+            
+        except queue.Empty:
+            continue
+        except Exception as e:
+            logger.error(f"Error saving activation {actual_idx}: {e}")
+            save_queue.task_done()
+
+
 def store_activations(
     model_name: str,
     rollouts_path: str,
@@ -107,10 +140,11 @@ def store_activations(
     end_idx: Optional[int] = None,
     batch_size: int = 1,
     dtype: torch.dtype = torch.bfloat16,
-    device_map: str = "auto"
+    device_map: str = "auto",
+    num_save_workers: int = 4
 ) -> None:
     """
-    Extract and store activations from model rollouts.
+    Extract and store activations from model rollouts with pipelined processing.
     
     Args:
         model_name: HuggingFace model identifier (e.g., "Qwen/Qwen3-4B")
@@ -121,6 +155,7 @@ def store_activations(
         batch_size: Number of responses to process in parallel (defaults to 1)
         dtype: Data type for model (defaults to torch.bfloat16)
         device_map: Device mapping strategy (defaults to "auto")
+        num_save_workers: Number of worker threads for saving (defaults to 4)
         
     Raises:
         FileNotFoundError: If rollouts_path doesn't exist
@@ -154,7 +189,20 @@ def store_activations(
     
     logger.info(f"Processing {len(responses_to_process)} responses (indices {start_idx} to {end_idx}) with batch_size={batch_size}")
     
-    # Extract and save activations in batches
+    # Set up pipelined processing with save queue and workers
+    save_queue: queue.Queue = queue.Queue(maxsize=num_save_workers * 2)  # Buffer for smooth pipeline
+    
+    # Start save worker threads
+    save_workers = []
+    for i in range(num_save_workers):
+        worker = threading.Thread(target=save_activation_worker, args=(save_queue, activations_dir))
+        worker.daemon = True
+        worker.start()
+        save_workers.append(worker)
+    
+    logger.info(f"Started {num_save_workers} save worker threads")
+    
+    # Extract and save activations in batches with pipelining
     with torch.no_grad():
         for batch_start in range(0, len(responses_to_process), batch_size):
             batch_end = min(batch_start + batch_size, len(responses_to_process))
@@ -190,24 +238,30 @@ def store_activations(
             # Extract activations
             try:
                 with model.trace(batch_texts):
-                    gc.collect()
-                    torch.cuda.empty_cache()
+                    logger.info("Starting activation extraction...")
                     
                     # Get dimensions from first layer to pre-allocate tensor
+                    logger.info("Getting dimensions from first layer...")
                     first_layer_output = model.model.layers[0].output  # type: ignore[attr-defined]
                     batch_size_actual, seq_len, d_model = first_layer_output.shape
                     num_layers = len(model.model.layers)  # type: ignore[attr-defined]
+                    logger.info(f"Dimensions: batch_size={batch_size_actual}, seq_len={seq_len}, d_model={d_model}, num_layers={num_layers}")
                     
                     # Pre-allocate tensor: (batch, layer, seq, d_model)
+                    logger.info("Pre-allocating activations tensor...")
                     activations = torch.zeros(batch_size_actual, num_layers, seq_len, d_model, dtype=first_layer_output.dtype, device=first_layer_output.device)
+                    logger.info(f"Pre-allocated tensor shape: {activations.shape}")
                     
                     # Fill tensor directly
+                    logger.info("Extracting activations from all layers...")
                     for layer_idx, layer in enumerate(model.model.layers):  # type: ignore[attr-defined]
+                        logger.info(f"Extracting from layer {layer_idx}/{num_layers-1}")
                         # Extract activations: layer.output has shape (batch, seq, d_model)
                         activations[:, layer_idx, :, :] = layer.output
                     
-                    # Prepare data for parallel saving
-                    save_tasks = []
+                    logger.info("Activation extraction complete!")
+                    
+                    # Queue activations for saving (pipelined with next batch extraction)
                     for i in range(len(batch)):
                         actual_idx = start_idx + batch_start + i
                         
@@ -229,26 +283,28 @@ def store_activations(
                         # Extract only activations for non-padding tokens: (layer, non_padding_seq, d_model)
                         item_activations_no_padding = item_activations[:, non_padding_indices, :]
                         
-                        # Prepare save task
-                        save_path = Path(activations_dir) / f"{actual_idx}.pt"
-                        save_tasks.append((actual_idx, token_ids_no_padding, item_activations_no_padding, save_path))
-                    
-                    # Save in parallel using ThreadPoolExecutor
-                    from concurrent.futures import ThreadPoolExecutor
-                    
-                    def save_activation_item(task_data):
-                        actual_idx, token_ids_no_padding, item_activations_no_padding, save_path = task_data
-                        logger.info(f"Saving activations for response {actual_idx} (shape: {item_activations_no_padding.shape})")
-                        torch.save((token_ids_no_padding, item_activations_no_padding), save_path)
-                        logger.info(f"Saved activations for response {actual_idx} (shape: {item_activations_no_padding.shape})")
-                    
-                    with ThreadPoolExecutor(max_workers=4) as executor:
-                        executor.map(save_activation_item, save_tasks)
+                        # Move to CPU to free GPU memory before queuing for save
+                        token_ids_cpu = token_ids_no_padding.cpu()
+                        activations_cpu = item_activations_no_padding.cpu()
+                        
+                        # Queue for saving (this will block if queue is full, providing backpressure)
+                        save_queue.put((actual_idx, token_ids_cpu, activations_cpu))
                     
             except Exception as e:
                 logger.error(f"Error on batch starting at {start_idx + batch_start}: {e}")
                 gc.collect()
                 torch.cuda.empty_cache()
                 continue
+    
+    # Wait for all saves to complete
+    logger.info("Waiting for all saves to complete...")
+    save_queue.join()
+    
+    # Stop save workers
+    for _ in range(num_save_workers):
+        save_queue.put(None)  # Sentinel value to stop workers
+    
+    for worker in save_workers:
+        worker.join()
     
     logger.info("Activation storage complete!")
