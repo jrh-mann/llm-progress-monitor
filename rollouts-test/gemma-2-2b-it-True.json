@@ -1,0 +1,602 @@
+[
+  {
+    "instruction": "Write a short story about a cat and a dog.",
+    "response": "Jasper, a sleek black cat with ice-blue",
+    "char_length": 39,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Can you recommend a chocolate cake recipe for two?",
+    "response": "## Simple and Delicious Chocolate Cake for Two\n\nThis",
+    "char_length": 52,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Ask a question about consumer rights",
+    "response": "What are some examples of consumer rights that consumers have",
+    "char_length": 61,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Give me 3 examples of a vocabulary word that means \"determined\".",
+    "response": "Here are 3 synonyms for \"determined\":\n\n",
+    "char_length": 39,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Edit the following sentence by replacing the word \"excellent\" with a similar meaning:\n\n\"The coffee was excellent\"",
+    "response": "Here are some ways to replace \"excellent\" with",
+    "char_length": 46,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Put together an outfit for a dinner date.",
+    "response": "Let's create a perfect dinner date outfit!",
+    "char_length": 42,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Edit the sentence \"I'm running late so I quickly ate breakfast\" to correct the grammar",
+    "response": "Here are a few ways to correct the grammar in",
+    "char_length": 45,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Name two health benefits of eating apples",
+    "response": "Here are two health benefits of eating apples:\n\n",
+    "char_length": 48,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Describe the importance of positive thinking",
+    "response": "## The Importance of Positive Thinking: A Profound",
+    "char_length": 50,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Describe a feature a smartphone could have that would make it easier to take care of the environment.",
+    "response": "## Smart Waste Management Feature: A QR-coded",
+    "char_length": 45,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Create a poem with 4 lines that portrays the beauty of sunsets.",
+    "response": "Crimson blush paints the western sky,\nGolden rays",
+    "char_length": 49,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Describe a specific emotion using five words.",
+    "response": "Sweet, melancholic, longing, enchanting, memories",
+    "char_length": 49,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "What is the most efficient approach to reducing carbon emissions?",
+    "response": "There isn't a single \"most efficient\"",
+    "char_length": 37,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Compare a bacteria cell to a plant cell.",
+    "response": "Here's a comparison of a bacterial cell to",
+    "char_length": 42,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Give me a list of 5 organisations that provide services for refugees in the United States.",
+    "response": "Here are 5 well-known organizations that provide",
+    "char_length": 48,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Generate a random example of an IPv4 address.",
+    "response": "192.168.1.",
+    "char_length": 10,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Generate a speech outline for expressing your opinion on the issue of online privacy.",
+    "response": "## Speech Outline: Protecting Online Privacy in a Digital",
+    "char_length": 57,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Generate a headline describing a current news article.",
+    "response": "Here are a few headline options, keeping in mind",
+    "char_length": 48,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "What is the latest development in Artificial Intelligence?",
+    "response": "It's tough to definitively say what the single",
+    "char_length": 46,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Explain how information can be stored in a database",
+    "response": "Imagine a library, where every book is organized with",
+    "char_length": 53,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Generate a sentence which describes the relationship between Elon Musk and SpaceX.",
+    "response": "Elon Musk is the driving force and visionary behind SpaceX",
+    "char_length": 58,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Provide the name of a famous person who had a positive influence in the world.",
+    "response": "This is subjective, but a strong contender would be",
+    "char_length": 51,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Create a metaphor that describes loneliness",
+    "response": "Loneliness is like a ship lost at sea with",
+    "char_length": 42,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Summarize the most important characteristics of a good leader.",
+    "response": "A \"good leader\" isn't defined by",
+    "char_length": 32,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Differentiate between a deviated septum and a deviated nasal spine.",
+    "response": "Both a deviated septum and a deviated nasal",
+    "char_length": 43,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Write a script to explain the process of signing up for an online course.",
+    "response": "## Signing Up for an Online Course: A Step",
+    "char_length": 42,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Describe a medicine that is used to treat an ailment associated with the heart",
+    "response": "Let's talk about **Lipitor (ator",
+    "char_length": 32,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Create a playlist of 10 songs that celebrates diversity and inclusion.",
+    "response": "This playlist aims to celebrate diversity and inclusion through music",
+    "char_length": 69,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Why do rockets need an engine?",
+    "response": "Rockets need engines to **propel themselves through",
+    "char_length": 51,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Find the similarities between these two words - 'flower' and 'bouquet'.",
+    "response": "The similarities between \"flower\" and \"bouquet\"",
+    "char_length": 47,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Make a list of three psychological techniques used in advertising.",
+    "response": "Here are three psychological techniques used in advertising, along",
+    "char_length": 66,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Come up with a domain-specific metaphor to explain how a computer works",
+    "response": "## The Neural Net: A Computer's Thought",
+    "char_length": 39,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Identify 3 key problems with the current US healthcare system and propose solutions to those problems.",
+    "response": "## 3 Key Problems in the US Healthcare System",
+    "char_length": 45,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Describe the most used transportation device in Egypt",
+    "response": "The most used transportation device in Egypt is  **",
+    "char_length": 51,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Construct a timeline of Galileo's life.",
+    "response": "## Galileo Galilei: A Life in Timeline\n\n",
+    "char_length": 40,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Create a strategy to increase the number of new customers by 30%.",
+    "response": "## Strategic Plan for Increasing New Customer Acquisitions by ",
+    "char_length": 62,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Compose a 500-word essay on the themes of loneliness revealed in Ernest Hemingway's novel \"The Old Man and the Sea\".",
+    "response": "## The Weight of Silence: Loneliness in Hemingway",
+    "char_length": 49,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Provide the name of five different types of flowers.",
+    "response": "Here are five different types of flowers:\n\n1",
+    "char_length": 44,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "List five herbs that grow easily.",
+    "response": "Here are five herbs that are known for being relatively",
+    "char_length": 55,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "What is the history behind the painting 'The Starry Night'?",
+    "response": "\"The Starry Night,\" an iconic artwork by",
+    "char_length": 40,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Suggest three techniques for improving online learning",
+    "response": "Here are three techniques for improving online learning, focusing",
+    "char_length": 65,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Create 5 reference resources that you'll use to complete your assignment.",
+    "response": "Please clarify what kind of assignment you are referring to",
+    "char_length": 59,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Summarize the debate about global warming.",
+    "response": "## The Global Warming Debate: A Summary\n\nThe",
+    "char_length": 44,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Analyze the movie \"Back to the Future\" and identify the elements of the story that make it a successful film.",
+    "response": "\"Back to the Future,\" released in 1",
+    "char_length": 35,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Generate a sentence that explains the importance of keeping your mental health in check.",
+    "response": "Prioritizing your mental health isn't a luxury",
+    "char_length": 46,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Edit this text to make it more descriptive: \"He likes to play basketball.\"",
+    "response": "Here are a few ways to make \"He likes",
+    "char_length": 37,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Curate 5 examples of effective communication techniques.",
+    "response": "Here are 5 examples of effective communication techniques:",
+    "char_length": 58,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Give me a recipe for dumplings.",
+    "response": "## Classic Pan-Fried Dumplings (Around ",
+    "char_length": 39,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Describe the type of job or career that is attractive to you.",
+    "response": "As a large language model, I don't",
+    "char_length": 34,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "List the components required for building a computer.",
+    "response": "Let's break down the essential components you'",
+    "char_length": 46,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Name the software engineering design pattern and give the definition of it.",
+    "response": "##  Software Engineering Design Patterns \n\nLet'",
+    "char_length": 47,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Generate a sentence using the following words: rose, birthday, summer.",
+    "response": "We carefully arranged a **rose** in a vase",
+    "char_length": 42,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Generate a piece of dialog between two characters discussing the current weather.",
+    "response": "Rain pattered gently against the bakery window, a",
+    "char_length": 49,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Invent a new word with a definition.",
+    "response": "**Embongrance** (noun)\n\nDefinition",
+    "char_length": 34,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Name two nations that compete in the FIFA World Cup",
+    "response": "Here are two nations that compete in the FIFA World",
+    "char_length": 51,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Which musical instrument is known as the King of Instruments?",
+    "response": "The **organ** is often called the \"King",
+    "char_length": 39,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Generate a script for a radio ad.",
+    "response": "##  Radio Ad Script: Coffee Time Essentials ",
+    "char_length": 44,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Identify the following mammal: Panther",
+    "response": "Panthera is a genus of big cats that includes",
+    "char_length": 45,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "What is the technology stack for developing a web application?",
+    "response": "The technology stack for developing a web application can vary",
+    "char_length": 62,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Create a poetic stanza on the topic of love",
+    "response": "A whisper soft, a gentle breeze,\nShy",
+    "char_length": 36,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Design an algorithm to identify a person's age from their date of birth.",
+    "response": "Here's an algorithm to identify a person'",
+    "char_length": 41,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Analyze the causes of the U.S civil war.",
+    "response": "##  Analyzing the Causes of the U.S",
+    "char_length": 35,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "How can email communication be more efficient?",
+    "response": "##  Boosting Email Communication Efficiency:\n\n**",
+    "char_length": 48,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Generate a title for a book about personal growth.",
+    "response": "Here are some titles for a book about personal growth",
+    "char_length": 53,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Generate a unique idea for a birthday present for a 6 year old.",
+    "response": "## Unique Birthday Present Ideas for a 6 Year",
+    "char_length": 45,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Name the capital cities in the states of New York and California",
+    "response": "Here are the capital cities of the states of New",
+    "char_length": 48,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "How would you explain the concept of Darwinism to an 8th grader?",
+    "response": "Imagine a species of spider. Let's say",
+    "char_length": 38,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Provide a counterargument to the statement \"Genetically modified foods are unhealthy.\"",
+    "response": "## There's No Overwhelming Evidence Saying Gene",
+    "char_length": 47,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Generate a creative solution to improve environmental sustainability.",
+    "response": "## The Bio-Brick: A Sustainable Housing Solution",
+    "char_length": 48,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "What is the longitude and latitude of Beijing, China?",
+    "response": "The longitude and latitude of Beijing, China are:",
+    "char_length": 49,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Tell me about a particular type of tree that grows in your region.",
+    "response": "As a language model I don't have a",
+    "char_length": 34,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Select a quote from a famous author.",
+    "response": "\"**\u201cThe only way to do great work",
+    "char_length": 33,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Compose a story involving a mouse and a cat.",
+    "response": "Oliver the mouse lived a life of secrecy. Born",
+    "char_length": 46,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Describe a method for organizing a desk for maximum productivity.",
+    "response": "##  Desk Organization for Maximum Productivity: Your Organized",
+    "char_length": 62,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Calculate the value of sin(8)",
+    "response": "You can't calculate sin(8) directly",
+    "char_length": 35,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Generate a list of questions that could be used to survey a customer\u2019s satisfaction level.",
+    "response": "## Customer Satisfaction Survey Questions:\n\n**General Satisfaction",
+    "char_length": 66,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "What is the difference between foreign policy and domestic policy?",
+    "response": "Foreign policy and domestic policy are two distinct but interconnected",
+    "char_length": 70,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Predict the median age of London.",
+    "response": "I can't give you an exact median age",
+    "char_length": 36,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Generate a pun related to solar energy.",
+    "response": "**\"Sunshine is the perfect battery charging fuel.",
+    "char_length": 49,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Create five descriptors that describe the smell of churros.",
+    "response": "Here are five descriptors that describe the smell of chur",
+    "char_length": 57,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Tell me the title of the most popular song released in 2020 so far.",
+    "response": "I cannot provide you with an exact title of the",
+    "char_length": 47,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Name a sport which is played indoors.",
+    "response": "Here are a few sports played indoors:\n\n*",
+    "char_length": 40,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Generate a story with a title \"The Adventure of Shadowman\"",
+    "response": "## The Adventure of Shadowman \n\nElias Thorne",
+    "char_length": 44,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Generate a sentence with an imperative verb and a reference to the letter 'g'.",
+    "response": "**Gently wrap the parcel, ensuring it'",
+    "char_length": 38,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Write 5 ideas for a unique birthday gift.",
+    "response": "Here are 5 unique birthday gift ideas:\n\n",
+    "char_length": 40,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Identify the similarities and differences between a cat and a dog.",
+    "response": "## Similarities between cats and dogs:\n\n*",
+    "char_length": 41,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Create a headline for this article: \"The rise of online shopping during the pandemic.\"",
+    "response": "Here are a few headline options for your article,",
+    "char_length": 49,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Describe the importance of collaboration in the classroom.",
+    "response": "Collaboration in the classroom is a cornerstone of effective learning",
+    "char_length": 69,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Come up with three different ways to save money.",
+    "response": "Here are three different ways to save money, focusing",
+    "char_length": 53,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Write a comparison of iPhone and Android phone.",
+    "response": "## iPhone vs. Android: A Detailed Comparison ",
+    "char_length": 45,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Describe an elephant's physical features.",
+    "response": "Elephants are the largest land mammals on Earth,",
+    "char_length": 48,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Give me an example of an instance where the rule of law was broken in history.",
+    "response": "## The Reign of Terror: An Example of Law",
+    "char_length": 41,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Transform this sentence into a question: The sun is bright today.",
+    "response": "Isn't the sun bright today? \n",
+    "char_length": 29,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Create a poem about a sunrise",
+    "response": "A stroke of velvet, rising wide,\nAcross",
+    "char_length": 39,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Tell me approximately how long it takes to get to the Moon from the earth.",
+    "response": "The time it takes to get to the Moon from",
+    "char_length": 41,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Construct a sentence of at least 16 words that brings to light the beauty of spring.",
+    "response": "The vibrant sunrise unveiled a kaleidoscope of blossoming flowers",
+    "char_length": 65,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Name the countries which experienced a decrease in education quality due to Covid-19",
+    "response": "It is difficult to definitively name specific countries that experienced",
+    "char_length": 72,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Describe the paperclip maximizer problem.",
+    "response": "The paperclip maximizer problem is a famous thought",
+    "char_length": 51,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Provide an example of a sentence where you need to identify the subject and the predicate.",
+    "response": "**Sentence:** The playful puppy wagged its tail",
+    "char_length": 47,
+    "tokens_length": 10
+  },
+  {
+    "instruction": "Find three reasons why people should stop using plastic bags.",
+    "response": "Here are three reasons why people should think about reducing",
+    "char_length": 61,
+    "tokens_length": 10
+  }
+]
