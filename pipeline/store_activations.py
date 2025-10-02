@@ -141,7 +141,8 @@ def store_activations(
     batch_size: int = 1,
     dtype: torch.dtype = torch.bfloat16,
     device_map: str = "auto",
-    num_save_workers: int = 4
+    num_save_workers: int = 4,
+    layer_idx: Optional[int] = None
 ) -> None:
     """
     Extract and store activations from model rollouts with pipelined processing.
@@ -156,6 +157,7 @@ def store_activations(
         dtype: Data type for model (defaults to torch.bfloat16)
         device_map: Device mapping strategy (defaults to "auto")
         num_save_workers: Number of worker threads for saving (defaults to 4)
+        layer_idx: Specific layer index to extract activations from (defaults to None, extracts all layers)
         
     Raises:
         FileNotFoundError: If rollouts_path doesn't exist
@@ -187,7 +189,10 @@ def store_activations(
     end_idx = end_idx if end_idx is not None else len(formatted_responses)
     responses_to_process = formatted_responses[start_idx:end_idx]
     
-    logger.info(f"Processing {len(responses_to_process)} responses (indices {start_idx} to {end_idx}) with batch_size={batch_size}")
+    if layer_idx is not None:
+        logger.info(f"Processing {len(responses_to_process)} responses (indices {start_idx} to {end_idx}) with batch_size={batch_size}, extracting layer {layer_idx} only")
+    else:
+        logger.info(f"Processing {len(responses_to_process)} responses (indices {start_idx} to {end_idx}) with batch_size={batch_size}, extracting all layers")
     
     # Set up pipelined processing with save queue and workers
     save_queue: queue.Queue = queue.Queue(maxsize=num_save_workers * 2)  # Buffer for smooth pipeline
@@ -212,20 +217,8 @@ def store_activations(
             gc.collect()
             torch.cuda.empty_cache()
             
-            # Prepare batch inputs by formatting with chat template
-            batch_texts = []
-            for item in batch:
-                # Format the instruction and response using the chat template
-                messages = [
-                    {"role": "user", "content": item['instruction']},
-                    {"role": "assistant", "content": item['response']}
-                ]
-                formatted_text = tokenizer.apply_chat_template(
-                    messages, 
-                    tokenize=False, 
-                    add_generation_prompt=False
-                )
-                batch_texts.append(formatted_text)
+            # Use pre-formatted chat templates instead of re-formatting
+            batch_texts = [item['chat_formatted'] for item in batch]
             
             # Tokenize batch with padding
             batch_encodings = tokenizer(
@@ -240,24 +233,38 @@ def store_activations(
                 with model.trace(batch_texts):
                     logger.info("Starting activation extraction...")
                     
-                    # Get dimensions from first layer to pre-allocate tensor
+                    # Get dimensions from first layer
                     logger.info("Getting dimensions from first layer...")
                     first_layer_output = model.model.layers[0].output  # type: ignore[attr-defined]
                     batch_size_actual, seq_len, d_model = first_layer_output.shape
-                    num_layers = len(model.model.layers)  # type: ignore[attr-defined]
-                    logger.info(f"Dimensions: batch_size={batch_size_actual}, seq_len={seq_len}, d_model={d_model}, num_layers={num_layers}")
                     
-                    # Pre-allocate tensor: (batch, layer, seq, d_model)
-                    logger.info("Pre-allocating activations tensor...")
-                    activations = torch.zeros(batch_size_actual, num_layers, seq_len, d_model, dtype=first_layer_output.dtype, device=first_layer_output.device)
-                    logger.info(f"Pre-allocated tensor shape: {activations.shape}")
-                    
-                    # Fill tensor directly
-                    logger.info("Extracting activations from all layers...")
-                    for layer_idx, layer in enumerate(model.model.layers):  # type: ignore[attr-defined]
-                        logger.info(f"Extracting from layer {layer_idx}/{num_layers-1}")
-                        # Extract activations: layer.output has shape (batch, seq, d_model)
-                        activations[:, layer_idx, :, :] = layer.output
+                    if layer_idx is not None:
+                        num_layers = len(model.model.layers)  # type: ignore[attr-defined]
+                        if layer_idx >= num_layers or layer_idx < 0:
+                            raise ValueError(f"layer_idx {layer_idx} is out of range. Model has {num_layers} layers (0-{num_layers-1})")
+                        
+                        logger.info(f"Dimensions: batch_size={batch_size_actual}, seq_len={seq_len}, d_model={d_model}, extracting layer {layer_idx}")
+                        
+                        # Extract activations from specified layer only - no pre-allocation
+                        logger.info(f"Extracting activations from layer {layer_idx}...")
+                        target_layer = model.model.layers[layer_idx]  # type: ignore[attr-defined]
+                        # Shape: (batch, seq, d_model) -> add layer dimension: (batch, 1, seq, d_model)
+                        activations = target_layer.output.unsqueeze(1)
+                    else:
+                        num_layers = len(model.model.layers)  # type: ignore[attr-defined]
+                        logger.info(f"Dimensions: batch_size={batch_size_actual}, seq_len={seq_len}, d_model={d_model}, num_layers={num_layers}")
+                        
+                        # Pre-allocate tensor for all layers: (batch, layer, seq, d_model)
+                        logger.info("Pre-allocating activations tensor for all layers...")
+                        activations = torch.zeros(batch_size_actual, num_layers, seq_len, d_model, dtype=first_layer_output.dtype, device=first_layer_output.device)
+                        logger.info(f"Pre-allocated tensor shape: {activations.shape}")
+                        
+                        # Fill tensor directly from all layers
+                        logger.info("Extracting activations from all layers...")
+                        for layer_idx_iter, layer in enumerate(model.model.layers):  # type: ignore[attr-defined]
+                            logger.info(f"Extracting from layer {layer_idx_iter}/{num_layers-1}")
+                            # Extract activations: layer.output has shape (batch, seq, d_model)
+                            activations[:, layer_idx_iter, :, :] = layer.output
                     
                     logger.info("Activation extraction complete!")
                     
@@ -277,10 +284,10 @@ def store_activations(
                         # Extract only non-padding token IDs
                         token_ids_no_padding = token_ids[non_padding_indices]
                         
-                        # Get activations for this item: (layer, seq, d_model)
+                        # Get activations for this item: (layer, seq, d_model) or (1, seq, d_model)
                         item_activations = activations[i]
                         
-                        # Extract only activations for non-padding tokens: (layer, non_padding_seq, d_model)
+                        # Extract only activations for non-padding tokens: (layer, non_padding_seq, d_model) or (1, non_padding_seq, d_model)
                         item_activations_no_padding = item_activations[:, non_padding_indices, :]
                         
                         # Move to CPU to free GPU memory before queuing for save
