@@ -6,14 +6,14 @@ from pipeline.train_probe import train_probe
 
 # %%
 if __name__ == "__main__":
-    '''generate_rollouts(
+    generate_rollouts(
         model_name="Qwen/Qwen3-4B",
         prompts_path="/workspace/llm-progress-monitor/splits/harmless_train.json",
-        num_rollouts=100,
+        num_rollouts=1000,
         max_tokens=32768,
         save_path="/workspace/llm-progress-monitor/rollouts-test",
         thinking_mode=2, # 0: no thinking, 1: thinking, 2: both (for 100 rollouts, use 50 prompts x 2)
-    )'''
+    )
 
     store_activations(
         model_name="Qwen/Qwen3-4B",
