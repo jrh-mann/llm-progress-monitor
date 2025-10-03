@@ -183,14 +183,15 @@ responses = generate_rollouts(
 **How**:
 - Loads rollout responses and formats them with chat templates
 - Uses `nnsight` to trace through the model and capture layer outputs
-- Handles batching and memory management (crucial for large models)
+- Processes responses one at a time sequentially (simple and reliable)
 - Saves activations with corresponding token IDs to disk as `.pt` files
-- Uses pipelined processing: while saving one batch, the next batch is being extracted
+- Uses background saving: a worker thread saves to disk while the next response is being processed
 
 ### Key Features
 
-- **Pipelined Processing**: Multi-threaded saving overlaps with extraction for efficiency
-- **Memory Management**: Strips padding, moves to CPU immediately, aggressive garbage collection
+- **Sequential Processing**: Processes one response at a time for reliability and memory efficiency
+- **Background Saving**: Single worker thread saves activations to disk asynchronously while extraction continues
+- **Memory Management**: Moves to CPU immediately after extraction, aggressive garbage collection between responses
 - **Layer Selection**: Can extract all layers or a specific layer only
 - **Resume Support**: Can process subsets using `start_idx` and `end_idx`
 
@@ -207,10 +208,8 @@ def store_activations(
     activations_dir: str = '/workspace/llm-progress-monitor/rollouts/activations',
     start_idx: int = 0,
     end_idx: Optional[int] = None,
-    batch_size: int = 1,
     dtype: torch.dtype = torch.bfloat16,
     device_map: str = "auto",
-    num_save_workers: int = 4,
     layer_idx: Optional[int] = None
 ) -> None
 ```
@@ -221,10 +220,8 @@ def store_activations(
 - `activations_dir`: Directory to save activation tensors (default: `./rollouts/activations`)
 - `start_idx`: Starting index for processing (default: 0)
 - `end_idx`: Ending index for processing (default: None = all)
-- `batch_size`: Number of responses to process in parallel (default: 1)
 - `dtype`: Model data type (default: `torch.bfloat16`)
 - `device_map`: Device mapping strategy (default: `"auto"`)
-- `num_save_workers`: Number of worker threads for saving (default: 4)
 - `layer_idx`: Specific layer to extract (default: None = all layers)
 
 **Returns**: None (saves to disk)
@@ -257,11 +254,11 @@ def format_responses_with_chat_template(
 ```
 Formats responses with chat template for consistent processing.
 
-##### `save_activation_worker()`
+##### `_save_activations_worker()`
 ```python
-def save_activation_worker(save_queue: queue.Queue, activations_dir: str) -> None
+def _save_activations_worker(save_queue: queue.Queue) -> None
 ```
-Worker function that runs in a separate thread to save activations from a queue.
+Worker function that runs in a separate thread to save activations from a queue to disk.
 
 ### Example Usage
 
@@ -272,16 +269,16 @@ store_activations(
     model_name="Qwen/Qwen3-4B",
     rollouts_path="/workspace/llm-progress-monitor/rollouts/Qwen3-4B-1.json",
     activations_dir="/workspace/llm-progress-monitor/rollouts/activations",
-    batch_size=2,
     layer_idx=10  # Extract only layer 10
 )
 ```
 
 ### Performance Considerations
 
-- **Batch Size**: Larger batches use more GPU memory but are faster. Start with 1 for 7B+ models.
-- **Save Workers**: More workers reduce I/O bottleneck but use more CPU. 4-8 is typically optimal.
+- **Sequential Processing**: Responses are processed one at a time to ensure reliability and manage memory efficiently.
+- **Queue Size**: The save queue is limited to 10 items to prevent excessive memory usage from queued activations.
 - **Layer Selection**: Extracting a single layer saves ~90% memory compared to all layers.
+- **GPU Memory**: Aggressive garbage collection and cache clearing between responses prevents memory accumulation.
 
 ---
 
@@ -704,23 +701,19 @@ Single tensor of shape `(n_bins, d_model)` saved via `torch.save()`.
 
 ### For Memory Constraints
 
-**Reduce Batch Size**: Lower `batch_size` in Stages 2 and 4.
-
 **Extract Single Layer**: Use `layer_idx` parameter in Stage 2.
 
 **Process in Chunks**: Use `start_idx` and `end_idx` to process data in chunks.
 
-**Reduce Workers**: Lower `num_save_workers` in Stage 2 if CPU-bound.
+**Reduce Batch Size**: Lower `batch_size` in Stage 4 (Stage 2 always processes one at a time).
 
 ### For Performance
 
-**Increase Batch Size**: Higher `batch_size` in Stage 2 and 4 (if memory allows).
-
-**More Save Workers**: Increase `num_save_workers` in Stage 2 for faster I/O.
+**Increase Batch Size**: Higher `batch_size` in Stage 4 (Stage 2 processes sequentially).
 
 **Disable Logging**: Change logging level to `WARNING` or `ERROR`.
 
-**Use Float16**: Change `dtype=torch.float16` in Stage 2 (may reduce precision).
+**Use Float16**: Change `dtype=torch.float16` in Stage 2 (may reduce precision, not recommended).
 
 ---
 

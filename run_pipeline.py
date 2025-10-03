@@ -19,8 +19,7 @@ if __name__ == "__main__":
         model_name="Qwen/Qwen3-4B",
         rollouts_path="/workspace/llm-progress-monitor/rollouts-test/Qwen3-4B-2.json",
         activations_dir="/workspace/llm-progress-monitor/rollouts-test/activations",
-        batch_size = 32,
-        layer_idx = 15
+        layer_idx=15
     )
 
     '''train_dataloader, test_dataloader, stats = prepare_dataloaders(
