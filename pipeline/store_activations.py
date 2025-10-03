@@ -206,7 +206,7 @@ def store_activations(
                         else:
                             # Extract all layers
                             for layer in model.model.layers:  # type: ignore[attr-defined]
-                                layer_outputs.append(layer.output)
+                                layer_outputs.append(layer.output[0])
                         
                         # Stack: (num_layers, seq, d_model)
                         activations = torch.stack(layer_outputs, dim=0)
