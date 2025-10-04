@@ -2,3 +2,4 @@ venv/
 rollouts/activations/
 rollouts-test/activations/
 rollouts-big/activations/
+rollouts-big/test/activations
