@@ -81,9 +81,19 @@ def load_activations(
                 # Load tuple of (token_ids, activations)
                 token_ids, activations = torch.load(filepath)
                 
-                # Extract specific layer if requested
+                # Find the second occurrence of token 151644 (im_start)
+                im_start_token = 151644
+                im_start_positions = (token_ids == im_start_token).nonzero(as_tuple=True)[0]
+                
+                # Start from the second im_start token
+                start_pos = im_start_positions[1].item()
+                token_ids = token_ids[start_pos:]
+                
+                
                 if layer_idx is not None:
-                    activations = activations[layer_idx:layer_idx+1]  # Keep dimension: (1, seq_len, d_model)
+                    activations = activations[layer_idx:layer_idx+1, start_pos:, :]  # Keep single layer, slice sequence
+                else:
+                    activations = activations[:, start_pos:, :]  # Keep all layers, slice sequence
                 
                 # Move to CPU to save GPU memory
                 token_ids = token_ids.to('cpu')
