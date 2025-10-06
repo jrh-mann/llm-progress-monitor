@@ -32,7 +32,7 @@ def load_activations(
     start_idx: int = 0,
     end_idx: Optional[int] = None,
     layer_idx: Optional[int] = None
-) -> List[ActivationData]:
+) -> List[Optional[ActivationData]]:
     """
     Load activations from saved files.
     
@@ -65,41 +65,68 @@ def load_activations(
     
     logger.info(f"Loading activations from index {start_idx} to {end_idx}")
     
-    activations_list: List[ActivationData] = []
+    activations_list: List[Optional[ActivationData]] = [None] * (end_idx - start_idx)
+    
+    def load_single_activation(i: int) -> Tuple[int, Optional[ActivationData]]:
+        """Load a single activation file"""
+        filename = f'{i}.pt'
+        filepath = os.path.join(activations_dir, filename)
+        
+        if os.path.exists(filepath):
+            # Load tuple of (token_ids, activations)
+            token_ids, activations = torch.load(filepath)
+            
+            # Find the second occurrence of token 151644 (im_start)
+            im_start_token = 151644
+            im_start_positions = (token_ids == im_start_token).nonzero(as_tuple=True)[0]
+            
+            # Start from the second im_start token
+            start_pos = im_start_positions[1].item()
+            token_ids = token_ids[start_pos:]
+            
+            if layer_idx is not None:
+                activations = activations[layer_idx:layer_idx+1, start_pos:, :]  # Keep single layer, slice sequence
+            else:
+                activations = activations[:, start_pos:, :]  # Keep all layers, slice sequence
+            
+            # Move to CPU to save GPU memory
+            token_ids = token_ids.to('cpu')
+            activations = activations.to('cpu')
+            
+            return i, ActivationData(token_ids, activations)
+        return i, None
     
     with torch.no_grad():
-        for i in range(start_idx, end_idx):
-            if i % 100 == 0 and i > 0:
-                logger.info(f"Loaded {i - start_idx} activations")
-                gc.collect()
-                torch.cuda.empty_cache()
+        # Use ThreadPoolExecutor for parallel loading
+        from concurrent.futures import ThreadPoolExecutor, as_completed
+        
+        with ThreadPoolExecutor(max_workers=8) as executor:
+            # Submit all tasks
+            future_to_idx = {executor.submit(load_single_activation, i): i for i in range(start_idx, end_idx)}
             
-            filename = f'{i}.pt'
-            filepath = os.path.join(activations_dir, filename)
-            
-            if os.path.exists(filepath):
-                # Load tuple of (token_ids, activations)
-                token_ids, activations = torch.load(filepath)
-                
-                # Find the second occurrence of token 151644 (im_start)
-                im_start_token = 151644
-                im_start_positions = (token_ids == im_start_token).nonzero(as_tuple=True)[0]
-                
-                # Start from the second im_start token
-                start_pos = im_start_positions[1].item()
-                token_ids = token_ids[start_pos:]
-                
-                
-                if layer_idx is not None:
-                    activations = activations[layer_idx:layer_idx+1, start_pos:, :]  # Keep single layer, slice sequence
-                else:
-                    activations = activations[:, start_pos:, :]  # Keep all layers, slice sequence
-                
-                # Move to CPU to save GPU memory
-                token_ids = token_ids.to('cpu')
-                activations = activations.to('cpu')
-                
-                activations_list.append(ActivationData(token_ids, activations))
+            loaded_count = 0
+            # Collect results as they complete
+            for future in as_completed(future_to_idx):
+                try:
+                    idx, result = future.result()
+                    # Store result at correct index
+                    activations_list[idx - start_idx] = result
+                    
+                    if result is not None:
+                        loaded_count += 1
+                    
+                    # Progress logging
+                    if loaded_count % 100 == 0 and loaded_count > 0:
+                        logger.info(f"Loaded {loaded_count} activations")
+                        gc.collect()
+                        torch.cuda.empty_cache()
+                        
+                except Exception as exc:
+                    original_idx = future_to_idx[future]
+                    logger.warning(f"Failed to load activation {original_idx}: {exc}")
+    
+    # Filter out None values
+    activations_list = [act for act in activations_list if act is not None]
     
     if not activations_list:
         raise ValueError(f"No activations loaded in range [{start_idx}, {end_idx})")

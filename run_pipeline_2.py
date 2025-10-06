@@ -15,14 +15,14 @@ if __name__ == "__main__":
         thinking_mode=2, # 0: no thinking, 1: thinking, 2: both (for 100 rollouts, use 50 prompts x 2)
     )'''
 
-    '''store_activations(
+    store_activations(
         model_name="Qwen/Qwen3-4B",
-        rollouts_path="/workspace/llm-progress-monitor/rollouts-big/Qwen3-4B-2.json",
-        activations_dir="/workspace/llm-progress-monitor/rollouts-big/activations",
+        rollouts_path="/workspace/rollouts-big/test/Qwen3-4B-2.json",
+        activations_dir="/workspace/rollouts-big/test/activations",
         layer_idx=15
-    )'''
+    )
 
-    train_dataloader, test_dataloader, stats = prepare_dataloaders(
+    '''train_dataloader, test_dataloader, stats = prepare_dataloaders(
         activations_dir="/workspace/llm-progress-monitor/rollouts-big/activations",
         batch_size=1024,
         test_size=0.2,
@@ -45,4 +45,4 @@ if __name__ == "__main__":
     print(f"Training completed!")
     print(f"Final train loss: {training_stats.final_train_loss:.4f}")
     print(f"Final test loss: {training_stats.final_test_loss:.4f}")
-    print(f"Model saved to: /workspace/llm-progress-monitor/rollouts-big/probe_weights.pt")
+    print(f"Model saved to: /workspace/llm-progress-monitor/rollouts-big/probe_weights.pt")'''

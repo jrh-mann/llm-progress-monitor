@@ -243,4 +243,3 @@ xformers==0.0.32.post1
 xgrammar==0.1.23
 yarl==1.20.1
 zipp==1.0.0
-jaxtyping==0.2.39
