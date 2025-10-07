@@ -17,8 +17,8 @@ if __name__ == "__main__":
 
     store_activations(
         model_name="Qwen/Qwen3-4B",
-        rollouts_path="/workspace/llm-progress-monitor/rollouts-big/test/Qwen3-4B-2.json",
-        activations_dir="/workspace/llm-progress-monitor/rollouts-big/test/activations",
+        rollouts_path="/workspace/llm-progress-monitor/rollouts-big/Qwen3-4B-2.json",
+        activations_dir="/workspace/llm-progress-monitor/rollouts-big/activations",
         layer_idx=15
     )
 
